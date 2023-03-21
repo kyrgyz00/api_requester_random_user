@@ -25,6 +25,7 @@ enum ErrorsEnum {
 String getErrors(
   BuildContext context,
   ErrorsEnum error,
+  
 ) {
   switch (error) {
     case ErrorsEnum.invalidPhoneNumberError:

@@ -1,12 +1,9 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:f_practice_api_bloc/helpers/error_helper.dart';
 import 'package:flutter/material.dart';
-
-
 
 class APIRequester {
   APIRequester({
@@ -70,7 +67,9 @@ class APIRequester {
           }
         case DioErrorType.other: //DEFAULT
           {
-            return ErrorsEnum.invalidError;
+            log("message");
+            if(error is ErrorsEnum){}
+         return ErrorsEnum.noInternetConnectionError;
           }
         case DioErrorType.cancel: //CANCEL
           {
@@ -145,7 +144,7 @@ class APIRequester {
     }
   }
 
-Future<Response> toDelete(
+  Future<Response> toDelete(
     String url, {
     Map<String, dynamic>? dataParam,
     Map<String, dynamic>? headers,

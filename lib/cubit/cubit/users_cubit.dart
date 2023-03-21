@@ -6,7 +6,7 @@ import 'package:f_practice_api_bloc/helpers/error_helper.dart';
 import 'package:f_practice_api_bloc/models/random_user_model.dart';
 import 'package:meta/meta.dart';
 
-part 'users_bloc_state.dart';
+part 'users_state.dart';
 
 class UsersBlocCubit extends Cubit<UsersBlocState> {
   UsersBlocCubit() : super(UsersBlocInitial());
@@ -18,15 +18,19 @@ class UsersBlocCubit extends Cubit<UsersBlocState> {
 
     try {
       var response = await apiRequester.toGet("/api");
-      // log(response.data["results"][0].toString());
+      log(response.data["results"][0].toString());
 
       user = RandomUserModel.fromJson(response.data["results"][0]);
 
       emit(UsersFetchedState(user));
     } catch (error) {
       log(error.toString());
-      
-      // emit(CatchErrorstate(""));
+
+      if (error== ErrorsEnum.noInternetConnectionError) {
+        emit(ErrorState(ErrorsEnum.noInternetConnectionError));
+      } else {
+        emit(ErrorState(ErrorsEnum.systemError));
+      }
     }
   }
 }

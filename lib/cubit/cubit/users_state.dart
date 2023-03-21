@@ -1,4 +1,4 @@
-part of 'users_bloc_cubit.dart';
+part of 'users_cubit.dart';
 
 @immutable
 abstract class UsersBlocState {}
@@ -15,8 +15,8 @@ class UsersFetchedState extends UsersBlocState {
   UsersFetchedState(this.user);
 }
 
-class CatchErrorstate extends UsersBlocState {
-  final String error;
+class ErrorState extends UsersBlocState {
+  final ErrorsEnum error;
 
-  CatchErrorstate(this.error);
+  ErrorState(this.error);
 }
